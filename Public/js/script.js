@@ -36,7 +36,7 @@ if (Gallery.count() == 0){ //if it'S not in cache...
 sammy = Sammy('body', function () {
 		this.use(Sammy.Haml, 'haml'); //default uses .template file ext for templates
 		this.use('Storage');
-		this.use('Cache');
+		//this.use('Cache');
 		this.use('Title');
 		this.use(Sammy.JSON);
 
@@ -44,11 +44,9 @@ sammy = Sammy('body', function () {
 
 		// LOAD ROUTE (homepage)
 	this.get('/', function (context) {
-		context.render('templates/header.haml', {item: item})
-		               .replace(context.$element('header'));
-		      });
-
-
+		alert('tend');
+		context.render('/templates/header.haml', {item: item})
+		   .replace(context.$element('#main'));
 	}); //end "get #/"
 
 
@@ -58,7 +56,6 @@ sammy = Sammy('body', function () {
 	}); //end "get #/"
 
 	this.get('/infos', function (context) {
-
 		alert("infos");
 	}); //end "get #/"
 
@@ -70,8 +67,8 @@ sammy = Sammy('body', function () {
 
 sammy.run('/');
 
-}); //eo doc ready
 
+});//eo doc ready
 
 
 
