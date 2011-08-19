@@ -19,7 +19,6 @@
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
@@ -57,14 +56,20 @@
 
 
   <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/sammy/sammy.js"></script>
+  <script defer src="js/sammy/plugins/sammy.haml.js"></script>
+  <script defer src="js/sammy/plugins/sammy.title.js"></script>
+  <script defer src="js/sammy/plugins/sammy.cache.js"></script>
   <script defer src="js/plugins.js"></script>
+  
   <script defer src="js/script.js"></script>
   <!-- end scripts-->
 
 	
   <!-- Change UA-XXXXX-X to be your site's ID -->
+  
   <script>
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    window._gaq = [['_setAccount','UA-24688279-3'],['_trackPageview'],['_trackPageLoadTime']]; //MD code
     Modernizr.load({
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
     });
