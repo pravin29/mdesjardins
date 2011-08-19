@@ -1,10 +1,9 @@
 [
     {
-        "id": "rio111",
-        "nbImg": "1",
-        "cat": "pub",
-        "title_en": "Régie des installation Olympiques",
-        "title_fr": "Régie des installation Olympiques",
+        "id": "fall_2001",
+        "nbImg": "5",
+        "year": "2001",
+        "season": "Fall",
         "images": [
             {
                 "caption_en": "",
@@ -14,12 +13,29 @@
             }
         ]
     }    ,
-        {
-            "id": "rio222",
-            "nbImg": "1",
-            "cat": "pub",
-            "title_en": "Régie des installation Olympiques",
-            "title_fr": "Régie des installation Olympiques",
+    
+    
+     {
+          "id": "fall_2006",
+          "nbImg": "5",
+          "year": "2006",
+          "season": "Fall",
+          "images": [
+              {
+                  "caption_en": "",
+                  "desc_en": "",
+                  "caption_fr": "Panneau d’affichage",
+                  "desc_fr": "Publicité pour le centre de conditionnement du Parc Oympique."
+              }
+          ]
+      }    ,
+      
+      
+       {
+            "id": "spring_2006",
+            "nbImg": "5",
+            "year": "2006",
+            "season": "Spring",
             "images": [
                 {
                     "caption_en": "",
@@ -28,20 +44,7 @@
                     "desc_fr": "Publicité pour le centre de conditionnement du Parc Oympique."
                 }
             ]
-        }    ,
-            {
-                "id": "rio333",
-                "nbImg": "1",
-                "cat": "pub",
-                "title_en": "Régie des installation Olympiques",
-                "title_fr": "Régie des installation Olympiques",
-                "images": [
-                    {
-                        "caption_en": "",
-                        "desc_en": "",
-                        "caption_fr": "Panneau d’affichage",
-                        "desc_fr": "Publicité pour le centre de conditionnement du Parc Oympique."
-                    }
-                ]
-            }
+        }    
+        
+        
 ]

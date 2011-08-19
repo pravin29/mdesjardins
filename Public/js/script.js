@@ -42,10 +42,14 @@ Gallery = Model("gallery", function() {
 	$.getJSON('data/gallery.json', function(data) { //cached...
 	  $.each(data, function(key, val) {
 		//	alert('each' +val );
-			gal = new Gallery(val);
+			var gal = new Gallery(val);
 			gal.save();
+			alert("galleries count = "+ Gallery.count());
 	  }) //end of each...
 		//alert('loaded json = ' + Gallery.count());
+		
+		// !!! Dispatch an Event that JSON is loaded!
+		
 	});//eo json init
 //}//end if!
 
@@ -81,7 +85,10 @@ sammy = Sammy('body', function () {
 						//alert('loaded footer');
 				});
 				
-				context.render('templates/home.html', {title: "hello!"})
+				/* It bugs because the JSON isn't loaded!!! */
+				galleries = Gallery.all();
+				alert("galleries = "+Gallery.count());
+				context.render('templates/home.html', {gal: galleries})
 				   .replace(context.$element('section#home')).then(function(content) {
 							//alert('loaded footer');
 					});

@@ -2,11 +2,14 @@
 
 <nav>
   
-  <a href="/col/fall_2011">
-    <span class="season">fall</span>
-    <span class="year">2011</span>
+  <% for ( var i = 0; i < gal.length; i++ ) { %>
+  <a href="/col/<%= gal[i].attr('id') %>">
+    <span class="season"><%= gal[i].attr('season') %></span>
+    <span class="year"><%= gal[i].attr('year') %></span>
   </a>
+  <% } %>
   
+  <!-- 
   <a href="/col/fall_2006">
     <span class="season">fall</span>
     <span class="year">2006</span>
@@ -31,7 +34,7 @@
     <span class="season">fall</span>
     <span class="year">2011</span>
   </a>
-  
+  -->
   
 </nav>
 
