@@ -8,6 +8,19 @@ $(document).ready(function() {
 	
 	// MODEL CODE...
 
+	//fadeIn animation
+	$('#seo').remove();
+
+	$('#cache').addClass('invisible').delay(1200).queue(function(next){
+		$('#cache').remove(); //we remove the DOM node once anim is over...
+		next();
+	});
+
+
+
+
+
+
 Gallery = Model("gallery", function() {
 	  this.persistence(Model.localStorage);
 		this.extend({
@@ -20,44 +33,78 @@ Gallery = Model("gallery", function() {
 	  }) // eo extend
 }); // eo model gallery
 
-if (Gallery.count() == 0){ //if it'S not in cache...
+
+//if (Gallery.count() == 0){ //if it'S not in cache...
+//alert('loading json');
 	$.getJSON('data/gallery.json', function(data) { //cached...
 	  $.each(data, function(key, val) {
-			var gal = new City(val);
+		//	alert('each' +val );
+			gal = new Gallery(val);
 			gal.save();
 	  }) //end of each...
+		//alert('loaded json = ' + Gallery.count());
 	});//eo json init
-}//end if!
+//}//end if!
 
 
 
 	
 	
 sammy = Sammy('body', function () {
-		this.use(Sammy.Haml, 'haml'); //default uses .template file ext for templates
-		this.use('Storage');
+			this.use('Storage');
 		//this.use('Cache');
+		this.use(Sammy.Template, "html");
 		this.use('Title');
 		this.use(Sammy.JSON);
+		this.use(Sammy.Haml); //default uses .template file ext for templates
 
 
 
 		// LOAD ROUTE (homepage)
 	this.get('/', function (context) {
-		alert('tend');
-		context.render('/templates/header.haml', {item: item})
-		   .replace(context.$element('#main'));
-	}); //end "get #/"
+		
+		
+		context.bob = context.$element('#main');
+		
+		// LOAD PAGE - Initial Load for Basic View
+		context.render('templates/footer.html', {title: "hello!"})
+		   .appendTo(context.$element('footer')).then(function(content) {
+					//alert('loaded footer');
+			});
+			context.render('templates/header.html', {title: "hello!"})
+			   .replace(context.$element('header')).then(function(content) {
+						//alert('loaded footer');
+				});
+				
+				context.render('templates/home.html', {title: "hello!"})
+				   .replace(context.$element('section#home')).then(function(content) {
+							//alert('loaded footer');
+					});
+					
+	}); 
+
+
+	this.get('/col', function (context) {
+		//This Route shows the menu, but doesn't change the content!
+		var col = this.params['col'];
+		alert("col = "+ col);
+		$('body').removeClass('infos');
+		$('body').addClass('col');
+	}); 
 
 
 	this.get('/col/:col', function (context) {
 		var col = this.params['col'];
 		alert("col = "+ col);
-	}); //end "get #/"
+		$('body').removeClass('infos');
+		$('body').addClass('col');
+	}); 
 
 	this.get('/infos', function (context) {
 		alert("infos");
-	}); //end "get #/"
+		$('body').removeClass('col');
+		$('body').addClass('infos');
+	}); 
 
 
 

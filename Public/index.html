@@ -22,7 +22,8 @@
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/desjardins.css">
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -35,6 +36,9 @@
 
 <body>
 
+
+  <div id="cache"></div>
+
   <div id="container">
     <header>
       SEO Header
@@ -45,6 +49,14 @@
     
     
     <div id="main" role="main">
+      
+      <section id="home">
+      home!
+      </section>
+      
+      <section id="info">
+      Infos
+      </section>
       
     </div>
     
@@ -64,8 +76,10 @@
 
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="js/libs/js-model-0.10.1.min.js"></script>
+  <script defer src="js/libs/haml.js"></script>
   <script defer src="js/sammy/sammy.js"></script>
   <script defer src="js/sammy/plugins/sammy.haml.js"></script>
+  <script defer src="js/sammy/plugins/sammy.template.js"></script>
   <script defer src="js/sammy/plugins/sammy.title.js"></script>
   <script defer src="js/sammy/plugins/sammy.cache.js"></script>
   <script defer src="js/plugins.js"></script>
