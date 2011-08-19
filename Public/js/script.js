@@ -68,7 +68,7 @@ sammy = Sammy('body', function () {
 		
 		// LOAD PAGE - Initial Load for Basic View
 		context.render('templates/footer.html', {title: "hello!"})
-		   .appendTo(context.$element('footer')).then(function(content) {
+		   .replace(context.$element('footer')).then(function(content) {
 					//alert('loaded footer');
 			});
 			context.render('templates/header.html', {title: "hello!"})
