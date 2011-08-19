@@ -18,6 +18,9 @@ $(document).ready(function() {
 
 
 
+function scrollTop(){
+	$('body').scrollTo({ top:0, left:0 }, 300);
+}
 
 
 
@@ -62,7 +65,9 @@ sammy = Sammy('body', function () {
 
 		// LOAD ROUTE (homepage)
 	this.get('/', function (context) {
-		
+		$('body').removeClass('info');
+		$('body').addClass('col');
+		scrollTop();
 		
 		context.bob = context.$element('#main');
 		
@@ -80,30 +85,36 @@ sammy = Sammy('body', function () {
 				   .replace(context.$element('section#home')).then(function(content) {
 							//alert('loaded footer');
 					});
-					
+					context.render('templates/info.html', {title: "hello!"})
+					   .replace(context.$element('section#info')).then(function(content) {
+								//alert('loaded footer');
+						});
 	}); 
 
 
 	this.get('/col', function (context) {
 		//This Route shows the menu, but doesn't change the content!
 		var col = this.params['col'];
-		alert("col = "+ col);
-		$('body').removeClass('infos');
+		//alert("col = "+ col);
+		$('body').removeClass('info');
 		$('body').addClass('col');
+		scrollTop();
 	}); 
 
 
 	this.get('/col/:col', function (context) {
 		var col = this.params['col'];
-		alert("col = "+ col);
-		$('body').removeClass('infos');
+		//alert("col = "+ col);
+		$('body').removeClass('info');
 		$('body').addClass('col');
+		scrollTop();
 	}); 
 
 	this.get('/infos', function (context) {
-		alert("infos");
+		//alert("infos");
 		$('body').removeClass('col');
-		$('body').addClass('infos');
+		$('body').addClass('info');
+		scrollTop();
 	}); 
 
 
