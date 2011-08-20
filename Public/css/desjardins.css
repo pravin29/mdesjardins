@@ -27,20 +27,24 @@ html.js #seo{ display:none;}
 /* LAYOUT */
 
 
-header{ height:80px; width:100%; background:#000;  position:fixed; z-index:1; }
-footer{ height:50px; width:100%; background:#000; bottom:0px; position:fixed;}
+header{ height:60px; width:100%; background:#000;  position:fixed; z-index:1; font-size:18px; }
+footer{ height:55px; width:100%; background:#000; bottom:0px; position:fixed;}
 section#home{ 
-	position:relative; height:100%; background:#f00; 
+	position:relative; 
+	height:100%; 
+	background:#f00; 
 	z-index:0;
-	height:400px;
-	top:100px;
+	height:600px; /* !!! to adjust dynamically ??*/
+	top:70px;
 	}
-#main{position:absolute;  height:100%;	
+#main{
+	position:absolute;  height:100%;	
 	-webkit-transition: all 0.6s ease-in-out;
 	-moz-transition: all 0.6s ease-in-out;
 	-o-transition: all 0.6s ease-in-out;
 	-ms-transition: all 0.6s ease-in-out;
-	transition: all 0.6s ease-in-out; }
+	transition: all 0.6s ease-in-out; 
+	}
 
 
 /* HEADER */
@@ -53,22 +57,33 @@ header .logo, header nav a.btInfo{ float:right; }
 
 /* GALLERY */
 #home nav{ height:100%; background:#0f0; float:left; width:200px; margin-right:5px; }
-#home nav a{ display:block; text-decoration:none; }
-.gallery img{ 
-	height:100%; float:left; margin-right:5px; 
-	width:300px; white-space:nowrap;
+#home nav a{ 
+	display:block; text-decoration:none;
+	color:#555;
+	padding:5px 10px ;
+	font-size:18px;
 	-webkit-transition: all 0.6s ease-in-out;
 	-moz-transition: all 0.6s ease-in-out;
 	-o-transition: all 0.6s ease-in-out;
 	-ms-transition: all 0.6s ease-in-out;
 	transition: all 0.6s ease-in-out;
-	opacity:1;
+ }
+#home nav a.active{ color:#fff; background:#000;}
+.gallery img{ 
+	height:100%; margin-right:5px; 
+	 white-space:nowrap;
+	float:left; 
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	-o-transition: all 0.6s ease-in-out;
+	-ms-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
 	}
 .gallery img.loading{opacity:0;  }
 .gallery{ 
 	display:inline; float:left; 
 	position:absolute; height:100%;  
-	width:1900px;
+	width:2900px;
 	white-space:nowrap;
 	}
 	

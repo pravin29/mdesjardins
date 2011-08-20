@@ -1,17 +1,10 @@
-/* Author: I Plan Websites
-
-*/
-
-
-
+/* Author: I Plan Websites .com  */
 $(document).ready(function() {
-	
-	
-	
-	
-	
-	// MODEL CODE...
 
+
+
+
+///////////// init + misc view functions
 function initView(){
 	//fadeIn animation
 	$('#seo').remove();
@@ -21,12 +14,7 @@ function initView(){
 	});
 	
 	sammy.run('/');
-	
 }
-
-
-
-
 
 
 function scrollTop(){
@@ -34,6 +22,7 @@ function scrollTop(){
 }
 
 
+/////////////// MODEL CODE...
 
 Gallery = Model("gallery", function() {
 	  this.persistence(Model.localStorage);
@@ -48,22 +37,17 @@ Gallery = Model("gallery", function() {
 }); // eo model gallery
 
 
-
-
-	
-	
+/////////////// ROUTES (SAMMY)
 sammy = Sammy('body', function () {
 			this.use('Storage');
 		//this.use('Cache');
 		this.use(Sammy.Template, "html");
 		this.use('Title');
 		this.use(Sammy.JSON);
-		this.use(Sammy.Haml); //default uses .template file ext for templates
+		//this.use(Sammy.Haml); //default uses .template file ext for templates
 
-
-
-		// LOAD ROUTE (homepage)
-	this.get('/', function (context) {
+		//////// LOAD ROUTE (homepage)
+		this.get('/', function (context) {
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
@@ -73,27 +57,25 @@ sammy = Sammy('body', function () {
 		// LOAD PAGE - Initial Load for Basic View
 		context.render('/templates/footer.html', {title: "hello!"})
 		   .replace(context.$element('footer')).then(function(content) {
-					//alert('loaded footer');
 			});
 			context.render('/templates/header.html', {title: "hello!"})
 			   .replace(context.$element('header')).then(function(content) {
-						//alert('loaded footer');
+						$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
+							scrollTop();
+						});
 				});
 				
 				/* It bugs because the JSON isn't loaded!!! */
 				galleries = Gallery.all();
-			//	alert("galleries = "+Gallery.count());
 				context.render('/templates/home.html', {gal: galleries})
 				   .replace(context.$element('section#home')).then(function(content) {
-							//alert('loaded footer');
 					});
 					context.render('/templates/info.html', {title: "hello!"})
 					   .replace(context.$element('section#info')).then(function(content) {
-								//alert('loaded footer');
 						});
 	}); 
 
-
+	///////////////
 	this.get('/col', function (context) {
 		//This Route shows the menu, but doesn't change the content!
 		var col = this.params['col'];
@@ -103,72 +85,57 @@ sammy = Sammy('body', function () {
 		scrollTop();
 	}); 
 
-
+	//////////////////
 	this.get('/col/:col', function (context) {
 		var col = this.params['col'];
-		//alert("col = "+ col);
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
 		
-	//	alert('GAL C ='+Gallery.count());
-		var gal = Gallery.select(function() {
+		$('#home nav a.active').removeClass('active');//Interface FX (active bt)
+		$('#home nav a.'+col).addClass('active');
+		
+		var gal = Gallery.select(function() { //selecting the galery model (json bit)
 		  return this.attr("id") == col
 		}).first();
-		//alert(gal + "= gal");
+		
 		context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
-				//FADE IMG on load...
-					$(".gallery img").one('load', function() {
+					
+					$(".gallery img").one('load', function() {//FADE IMG on load...
 					  $(this).removeClass('loading');
 					}).each(function() {
 					  if(this.complete) $(this).load(); //fix caching event not firing
 					});
-			//FADE IMG on load...
-					$(".gallery img").bind('click', function() {
+					
+					$(".gallery img").bind('click touch', function() {//bind scrolling behavior on img clicks
 						$.scrollTo(this, 300, {axis: 'x'});
 					});
+			}); // eo render
+	}); // eo route
 
-
-			});
-		
-		
-	}); 
-
+	///////////////////////
 	this.get('/infos', function (context) {
 		//alert("infos");
 		$('body').removeClass('col');
 		$('body').addClass('info');
 		scrollTop();
-	}); 
-
-
-
-
-
+	}); // eo route
+	
 });//eo sammy routes
 
 
 // WE LAOD DATA JSON, then call the init Route!
 
 //if (Gallery.count() == 0){ //if it'S not in cache...
-//alert('loading json');
 	$.getJSON('data/gallery.json', function(data) { //cached...
 	  $.each(data, function(key, val) {
-		//	alert('each' +val );
 			var gal = new Gallery(val);
 			gal.save();
-			//alert("galleries count = "+ Gallery.count());
 	  }) //end of each...
-		//alert('loaded json = ' + Gallery.count());
-		
-		// !!! Dispatch an Event that JSON is loaded!
+
 		initView(); // starts sammy and fadeIn
 	});//eo json init
 //}//end if!
-
-
-//sammy.run('/');
-
 
 });//eo doc ready
 

@@ -3,7 +3,7 @@
 <nav>
   
   <% for ( var i = 0; i < gal.length; i++ ) { %>
-  <a href="/col/<%= gal[i].attr('id') %>">
+  <a href="/col/<%= gal[i].attr('id') %>" class="<%= gal[i].attr('id') %>">
     <span class="season"><%= gal[i].attr('season') %></span>
     <span class="year"><%= gal[i].attr('year') %></span>
   </a>
