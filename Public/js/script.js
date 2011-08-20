@@ -8,13 +8,20 @@ $(document).ready(function() {
 	
 	// MODEL CODE...
 
+function initView(){
 	//fadeIn animation
 	$('#seo').remove();
-
 	$('#cache').addClass('invisible').delay(1200).queue(function(next){
 		$('#cache').remove(); //we remove the DOM node once anim is over...
 		next();
 	});
+	
+	sammy.run('/');
+	
+}
+
+
+
 
 
 
@@ -36,22 +43,6 @@ Gallery = Model("gallery", function() {
 	  }) // eo extend
 }); // eo model gallery
 
-
-//if (Gallery.count() == 0){ //if it'S not in cache...
-//alert('loading json');
-	$.getJSON('data/gallery.json', function(data) { //cached...
-	  $.each(data, function(key, val) {
-		//	alert('each' +val );
-			var gal = new Gallery(val);
-			gal.save();
-			alert("galleries count = "+ Gallery.count());
-	  }) //end of each...
-		//alert('loaded json = ' + Gallery.count());
-		
-		// !!! Dispatch an Event that JSON is loaded!
-		
-	});//eo json init
-//}//end if!
 
 
 
@@ -76,11 +67,11 @@ sammy = Sammy('body', function () {
 		context.bob = context.$element('#main');
 		
 		// LOAD PAGE - Initial Load for Basic View
-		context.render('templates/footer.html', {title: "hello!"})
+		context.render('/templates/footer.html', {title: "hello!"})
 		   .replace(context.$element('footer')).then(function(content) {
 					//alert('loaded footer');
 			});
-			context.render('templates/header.html', {title: "hello!"})
+			context.render('/templates/header.html', {title: "hello!"})
 			   .replace(context.$element('header')).then(function(content) {
 						//alert('loaded footer');
 				});
@@ -88,11 +79,11 @@ sammy = Sammy('body', function () {
 				/* It bugs because the JSON isn't loaded!!! */
 				galleries = Gallery.all();
 				alert("galleries = "+Gallery.count());
-				context.render('templates/home.html', {gal: galleries})
+				context.render('/templates/home.html', {gal: galleries})
 				   .replace(context.$element('section#home')).then(function(content) {
 							//alert('loaded footer');
 					});
-					context.render('templates/info.html', {title: "hello!"})
+					context.render('/templates/info.html', {title: "hello!"})
 					   .replace(context.$element('section#info')).then(function(content) {
 								//alert('loaded footer');
 						});
@@ -115,6 +106,22 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
+		
+		alert('GAL C ='+Gallery.count());
+		var gal = Gallery.select(function() {
+		  return this.attr("id") == col
+		}).first();
+		//alert(gal + "= gal");
+		context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
+					//alert('loaded footer');
+					alert('gal updated!');
+					
+					//bind action to imaegs (scroll on clicks)
+					
+					
+			});
+		
+		
 	}); 
 
 	this.get('/infos', function (context) {
@@ -130,7 +137,27 @@ sammy = Sammy('body', function () {
 
 });//eo sammy routes
 
-sammy.run('/');
+
+// WE LAOD DATA JSON, then call the init Route!
+
+//if (Gallery.count() == 0){ //if it'S not in cache...
+//alert('loading json');
+	$.getJSON('data/gallery.json', function(data) { //cached...
+	  $.each(data, function(key, val) {
+		//	alert('each' +val );
+			var gal = new Gallery(val);
+			gal.save();
+			//alert("galleries count = "+ Gallery.count());
+	  }) //end of each...
+		//alert('loaded json = ' + Gallery.count());
+		
+		// !!! Dispatch an Event that JSON is loaded!
+		initView(); // starts sammy and fadeIn
+	});//eo json init
+//}//end if!
+
+
+//sammy.run('/');
 
 
 });//eo doc ready
