@@ -1,6 +1,16 @@
 /* Author: I Plan Websites .com  */
 $(document).ready(function() {
 
+/////////////// UTILS - not project specefic
+
+
+$(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+    this.resizeTO = setTimeout(function() {
+        $(this).trigger('resizeEnd');
+    }, 100); //throttle: time to wait after the resize is done...
+});
+
 
 
 
@@ -12,6 +22,15 @@ function initView(){
 		$('#cache').remove(); //we remove the DOM node once anim is over...
 		next();
 	});
+	$(window).bind('resizeEnd adjustCssSizes', function() {
+	    //do something, window hasn't changed size in 500ms
+	    var window_h = $(window).height();
+			var gal_h = window_h - (70 + 60);  //these are the footer + header height...
+			
+			$('section#home').css('height', gal_h);
+			// ALSO adjust Width accordingly???
+	});
+	$(window).trigger('adjustCssSizes'); //we also trigger the view fix on init 
 	
 	sammy.run('/');
 }
