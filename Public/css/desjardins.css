@@ -53,10 +53,16 @@ header nav a.bt{ padding:  5px 10px; background:#777; color:#eee; float:left; te
 header nav a:hover{ color:#fff; background:#444;}
 header .logo, header nav a.btInfo{ float:right; }
 
-
+#fade_l, #fade_r{ width:40px;  z-index:10; position:fixed; height:100%; opacity:0.6; }
+#fade_l{left:0px; background:url('../img/fade_l.png'); }
+#fade_r{right:0px; background:url('../img/fade_r.png'); }
 
 /* GALLERY */
-#home nav{ height:100%; background:#0f0; float:left; width:200px; margin-right:5px; }
+#home nav{ 
+	height:100%; background:#0f0; float:left; 
+	width:200px; margin-right:5px; 
+	padding-left:20px;
+	}
 #home nav a{ 
 	display:block; text-decoration:none;
 	color:#555;
