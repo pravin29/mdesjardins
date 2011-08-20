@@ -1,7 +1,7 @@
 [
     {
         "id": "2011_fall",
-        "nbImg": "1",
+        "nbImg": "6",
         "year": "2011",
         "season": "fall"
     },
@@ -13,13 +13,13 @@
     },
     {
         "id": "2010_fall",
-        "nbImg": "1",
+        "nbImg": "12",
         "year": "2010",
         "season": "fall"
     },
     {
         "id": "2010_spring",
-        "nbImg": "2",
+        "nbImg": "8",
         "year": "2010",
         "season": "spring"
     },

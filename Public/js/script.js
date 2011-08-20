@@ -78,7 +78,7 @@ sammy = Sammy('body', function () {
 				
 				/* It bugs because the JSON isn't loaded!!! */
 				galleries = Gallery.all();
-				alert("galleries = "+Gallery.count());
+			//	alert("galleries = "+Gallery.count());
 				context.render('/templates/home.html', {gal: galleries})
 				   .replace(context.$element('section#home')).then(function(content) {
 							//alert('loaded footer');
@@ -107,14 +107,14 @@ sammy = Sammy('body', function () {
 		$('body').addClass('col');
 		scrollTop();
 		
-		alert('GAL C ='+Gallery.count());
+	//	alert('GAL C ='+Gallery.count());
 		var gal = Gallery.select(function() {
 		  return this.attr("id") == col
 		}).first();
 		//alert(gal + "= gal");
 		context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
 					//alert('loaded footer');
-					alert('gal updated!');
+				//	alert('gal updated!');
 					
 					//bind action to imaegs (scroll on clicks)
 					
