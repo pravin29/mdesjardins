@@ -36,7 +36,6 @@ footer{ height:55px; width:100%; background:#000; bottom:0px; position:fixed;}
 section#home{ 
 	position:relative; 
 	height:100%; 
-	background:#f00; 
 	z-index:0;
 	height:600px; /* !!! to adjust dynamically ??*/
 	top:70px;
@@ -63,7 +62,7 @@ header .logo, header nav a.btInfo{ float:right; }
 
 /* GALLERY */
 #home nav{ 
-	height:100%; background:#0f0; float:left; 
+	height:100%; float:left; 
 	width:200px; margin-right:5px; 
 	padding-left:20px;
 	}
@@ -80,7 +79,21 @@ header .logo, header nav a.btInfo{ float:right; }
 	opacity:0.5;
  }
 #home nav a:hover{ opacity:1; }
+
+#home nav a .year{ font-weight:bold; }
+#home nav a .season{ font-weight:normal; }
+#home nav a .arrow{ 
+	display:block; float:right; background:#f00; 
+	width:30px; height:30px; opacity:0; 
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	-o-transition: all 0.6s ease-in-out;
+	-ms-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+	}
+
 #home nav a.active{ opacity:1; text-decoration:underline;}
+.gallery{ border-left:solid 5px #fff; padding-left:10px;}
 .gallery img{ 
 	height:100%; margin-right:5px; 
 	 white-space:nowrap;
@@ -91,6 +104,11 @@ header .logo, header nav a.btInfo{ float:right; }
 	-ms-transition: all 0.6s ease-in-out;
 	transition: all 0.6s ease-in-out;
 	}
+#home nav a.active .arrow{ 
+	opacity:1; 	
+	}
+
+
 .gallery img.loading{opacity:0;  }
 .gallery{ 
 	display:inline; float:left; 
@@ -105,7 +123,7 @@ header .logo, header nav a.btInfo{ float:right; }
 /* INFO */
 #main{ 
 	height:600px;  
-	background:#f00;
+	/*background:#f00;*/
 	
 	}
 section#info{ width:100%; height:600px; background:#00f; position:absolute; top:800px; }
