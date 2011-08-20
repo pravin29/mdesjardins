@@ -54,7 +54,17 @@ header .logo, header nav a.btInfo{ float:right; }
 /* GALLERY */
 #home nav{ height:100%; background:#0f0; float:left; width:200px; margin-right:5px; }
 #home nav a{ display:block; text-decoration:none; }
-.gallery img{ height:100%; float:left; margin-right:5px; width:300px; white-space:nowrap;}
+.gallery img{ 
+	height:100%; float:left; margin-right:5px; 
+	width:300px; white-space:nowrap;
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	-o-transition: all 0.6s ease-in-out;
+	-ms-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+	opacity:1;
+	}
+.gallery img.loading{opacity:0;  }
 .gallery{ 
 	display:inline; float:left; 
 	position:absolute; height:100%;  

@@ -6,6 +6,10 @@
 
 $(document).ready(function() {
 	
+	
+	
+	
+	
 	// MODEL CODE...
 
 function initView(){
@@ -113,12 +117,18 @@ sammy = Sammy('body', function () {
 		}).first();
 		//alert(gal + "= gal");
 		context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
-					//alert('loaded footer');
-				//	alert('gal updated!');
-					
-					//bind action to imaegs (scroll on clicks)
-					
-					
+				//FADE IMG on load...
+					$(".gallery img").one('load', function() {
+					  $(this).removeClass('loading');
+					}).each(function() {
+					  if(this.complete) $(this).load(); //fix caching event not firing
+					});
+			//FADE IMG on load...
+					$(".gallery img").bind('click', function() {
+						$.scrollTo(this, 300, {axis: 'x'});
+					});
+
+
 			});
 		
 		
