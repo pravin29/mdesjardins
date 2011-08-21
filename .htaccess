@@ -15,7 +15,7 @@
 ### github.com/paulirish/html5-boilerplate-server-configs
 ###
 
-
+DirectoryIndex index.php index.html
 
 # ----------------------------------------------------------------------
 # Better website experience for IE users

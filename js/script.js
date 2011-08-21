@@ -2,8 +2,8 @@
 $(document).ready(function() {
 
 /////////////// UTILS - not project specefic
-
-
+  
+ 
 $(window).resize(function() {
     if(this.resizeTO) clearTimeout(this.resizeTO);
     this.resizeTO = setTimeout(function() {
@@ -35,6 +35,34 @@ function initView(){
 	sammy.run('/');
 }
 
+
+function initTemplates(context, callback){
+	
+	// LOAD PAGE - Initial Load for Basic View
+	context.render('/templates/footer.html', {title: "hello!"})
+	   .replace(context.$element('footer')).then(function(content) {
+	});
+		
+	context.render('/templates/header.html', {title: "hello!"})
+		 .replace(context.$element('header')).then(function(content) {
+				$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
+					scrollTop();
+				});
+		});
+		
+			/* It bugs because the JSON isn't loaded!!! */
+	galleries = Gallery.all();
+		context.render('/templates/home.html', {gal: galleries})
+		.replace(context.$element('section#home')).then(function(content) {
+			callback();
+			
+	});
+	
+	context.render('/templates/info.html', {title: "hello!"})
+	 .replace(context.$element('section#info')).then(function(content) {
+	});
+					
+}
 
 function scrollTop(){
 	$('html').scrollTo({ top:0, left:0 }, 300);
@@ -70,28 +98,11 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
+		initTemplates(context, function(){
+			alert('call back!!');
+		});
 		
-		context.bob = context.$element('#main');
-		
-		// LOAD PAGE - Initial Load for Basic View
-		context.render('/templates/footer.html', {title: "hello!"})
-		   .replace(context.$element('footer')).then(function(content) {
-			});
-			context.render('/templates/header.html', {title: "hello!"})
-			   .replace(context.$element('header')).then(function(content) {
-						$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
-							scrollTop();
-						});
-				});
-				
-				/* It bugs because the JSON isn't loaded!!! */
-				galleries = Gallery.all();
-				context.render('/templates/home.html', {gal: galleries})
-				   .replace(context.$element('section#home')).then(function(content) {
-					});
-					context.render('/templates/info.html', {title: "hello!"})
-					   .replace(context.$element('section#info')).then(function(content) {
-						});
+
 	}); 
 
 	///////////////
@@ -102,10 +113,14 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
+		initTemplates(context, function(){
+			alert('call back!!');
+		});
 	}); 
 
 	//////////////////
 	this.get('/col/:col', function (context) {
+	//	alert('col route!!');
 		var col = this.params['col'];
 		$('body').removeClass('info');
 		$('body').addClass('col');
@@ -119,6 +134,7 @@ sammy = Sammy('body', function () {
 		  return this.attr("id") == col
 		}).first();
 		
+		initTemplates(context, function(){
 		context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
 					
 					$(".gallery img").one('load', function() {//FADE IMG on load...
@@ -131,6 +147,8 @@ sammy = Sammy('body', function () {
 						$.scrollTo(this, 300, {axis: 'x'});
 					});
 			}); // eo render
+		}); //eo call back for initTemplate	
+			
 	}); // eo route
 
 	///////////////////////
@@ -139,6 +157,9 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('col');
 		$('body').addClass('info');
 		scrollTop();
+		initTemplates(context, function(){
+			alert('call back!!');
+		});
 	}); // eo route
 	
 });//eo sammy routes

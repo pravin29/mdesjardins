@@ -2,7 +2,8 @@
 
 // header( 'Location: http://www.yoursite.com/new_page.html' ) ; 
 $host =  $_SERVER['HTTP_HOST'];
-header( 'Location: http://'.$host );
+$url =  $_SERVER['REQUEST_URI'];
+header( 'Location: http://'.$host.'#'.$url); 
 
  ?>
 <!doctype html>
