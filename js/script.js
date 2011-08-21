@@ -26,7 +26,7 @@ function initView(){
 	    //do something, window hasn't changed size in 500ms
 	    var window_h = $(window).height();
 			var gal_h = window_h - (70 + 60);  //these are the footer + header height...
-			
+			if(gal_h >=800){gal_h=800}//set max height
 			$('section#home').css('height', gal_h);
 			// ALSO adjust Width accordingly???
 	});
@@ -36,8 +36,19 @@ function initView(){
 }
 
 
-function initTemplates(context, callback){
+
+
+function writeTemplateDom(elem, path, arg, callback){
 	
+}
+
+
+function initTemplates(context, callbackHome){
+	
+	
+	
+	
+	//!! TODO: only load the templates if they are NOT already loaded...
 	// LOAD PAGE - Initial Load for Basic View
 	context.render('/templates/footer.html', {title: "hello!"})
 	   .replace(context.$element('footer')).then(function(content) {
@@ -54,7 +65,7 @@ function initTemplates(context, callback){
 	galleries = Gallery.all();
 		context.render('/templates/home.html', {gal: galleries})
 		.replace(context.$element('section#home')).then(function(content) {
-			callback();
+			callbackHome(context);
 			
 	});
 	
@@ -98,8 +109,8 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
-		initTemplates(context, function(){
-			alert('call back!!');
+		initTemplates(context, function(context){
+			// alert('call back!!');
 		});
 		
 
@@ -113,8 +124,8 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('info');
 		$('body').addClass('col');
 		scrollTop();
-		initTemplates(context, function(){
-			alert('call back!!');
+		initTemplates(context, function(context){
+			//alert('call back!!');
 		});
 	}); 
 
@@ -127,15 +138,18 @@ sammy = Sammy('body', function () {
 		//scrollTop();
 		$('html').scrollTo({ top:0, left:200 }, 300); //!! TWEAK value!
 		
-		$('#home nav a.active').removeClass('active');//Interface FX (active bt)
-		$('#home nav a.'+col).addClass('active');
+
 		
 		var gal = Gallery.select(function() { //selecting the galery model (json bit)
 		  return this.attr("id") == col
 		}).first();
 		
-		initTemplates(context, function(){
-		context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
+		initTemplates(context, function(context){
+			// alert('context = '+context);
+			context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
+					
+					$('#home nav a.active').removeClass('active');//Interface FX (active bt)
+					$('#home nav a.'+col).addClass('active');
 					
 					$(".gallery img").one('load', function() {//FADE IMG on load...
 					  $(this).removeClass('loading');
@@ -157,7 +171,7 @@ sammy = Sammy('body', function () {
 		$('body').removeClass('col');
 		$('body').addClass('info');
 		scrollTop();
-		initTemplates(context, function(){
+		initTemplates(context, function(context){
 			alert('call back!!');
 		});
 	}); // eo route
