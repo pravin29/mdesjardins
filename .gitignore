@@ -34,6 +34,8 @@ dwsync.xml
 intermediate
 publish
 .idea
+build
+design
 
 # build script local files
 build/buildinfo.properties
