@@ -1,5 +1,5 @@
 # Apache configuration file
-# httpd.apache.org/docs/2.2/mod/quickreference.html
+# httpd.apache.org/docs/2.2/mod/quickreference.html 
 
 # Note .htaccess files are an overhead, this logic should be in your Apache config if possible
 # httpd.apache.org/docs/2.2/howto/htaccess.html
@@ -402,7 +402,7 @@ Options -MultiViews
 # ----------------------------------------------------------------------
 
 # You can add custom pages to handle 500 or 403 pretty easily, if you like.
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404.php
 
 
 
