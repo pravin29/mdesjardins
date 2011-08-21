@@ -1,0 +1,13 @@
+/*  STYLES for info page */
+
+
+section#info{ 
+	width:100%; 
+	height:600px; 
+	background:#00f; 
+	position:absolute; 
+	top:800px; 
+}
+
+
+	

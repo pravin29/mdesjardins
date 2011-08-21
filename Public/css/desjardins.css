@@ -126,10 +126,8 @@ header .logo, header nav a.btInfo{ float:right; }
 	/*background:#f00;*/
 	
 	}
-section#info{ width:100%; height:600px; background:#00f; position:absolute; top:800px; }
-
-body.info #main_scroll{ margin-top: -700px; /* TO UPDATE DYNAMICALLY as well! !! */
-	}
+	body.info #main_scroll{ margin-top: -700px; /* TO UPDATE DYNAMICALLY as well! !! */
+		}
 body.col #main_scroll{ margin-top: 0px; }
 
 #main_scroll{

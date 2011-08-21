@@ -37,7 +37,7 @@ function initView(){
 
 
 function scrollTop(){
-	$('body').scrollTo({ top:0, left:0 }, 300);
+	$('html').scrollTo({ top:0, left:0 }, 300);
 }
 
 
@@ -109,7 +109,8 @@ sammy = Sammy('body', function () {
 		var col = this.params['col'];
 		$('body').removeClass('info');
 		$('body').addClass('col');
-		scrollTop();
+		//scrollTop();
+		$('html').scrollTo({ top:0, left:200 }, 300); //!! TWEAK value!
 		
 		$('#home nav a.active').removeClass('active');//Interface FX (active bt)
 		$('#home nav a.'+col).addClass('active');
