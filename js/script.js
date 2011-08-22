@@ -38,18 +38,50 @@ function initView(){
 
 
 
-function writeTemplateDom(elem, path, arg, callback){
-	
+function renderTemplate(context, elem, path, templateData, callback){
+	context.render(path, templateData)
+	   .replace(context.$element(elem)).then(function(content) {
+				if($.isFunction(callback)){
+					callback(context);
+				}
+	});
 }
 
 
 function initTemplates(context, callbackHome){
 	
+	renderTemplate(context, 'footer', '/templates/footer.html', {title: "hello!"});
+	renderTemplate(context, 'header', '/templates/header.html', {title: "hello!"}, function(context){
+		$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
+			scrollTop();
+		});
+	});
 	
+	renderTemplate(context, 'section#home', '/templates/home.html', {gal: Gallery.all()}, function(context){
+		callbackHome(context);
+	});
+	
+	
+	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"});
+	/*
+	context.render('/templates/info.html', {title: "hello!"})
+	 .replace(context.$element('section#info')).then(function(content) {
+	});*/
+	
+	/*
+	galleries = Gallery.all();
+		context.render('/templates/home.html', {gal: galleries})
+		.replace(context.$element('section#home')).then(function(content) {
+			callbackHome(context);
+			
+	});*/
 	
 	
 	//!! TODO: only load the templates if they are NOT already loaded...
 	// LOAD PAGE - Initial Load for Basic View
+	
+	
+	/*
 	context.render('/templates/footer.html', {title: "hello!"})
 	   .replace(context.$element('footer')).then(function(content) {
 	});
@@ -59,19 +91,12 @@ function initTemplates(context, callbackHome){
 				$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
 					scrollTop();
 				});
-		});
+		});*/
 		
 			/* It bugs because the JSON isn't loaded!!! */
-	galleries = Gallery.all();
-		context.render('/templates/home.html', {gal: galleries})
-		.replace(context.$element('section#home')).then(function(content) {
-			callbackHome(context);
-			
-	});
 	
-	context.render('/templates/info.html', {title: "hello!"})
-	 .replace(context.$element('section#info')).then(function(content) {
-	});
+	
+	
 					
 }
 
@@ -137,32 +162,23 @@ sammy = Sammy('body', function () {
 		$('body').addClass('col');
 		//scrollTop();
 		$('html').scrollTo({ top:0, left:200 }, 300); //!! TWEAK value!
-		
-
-		
 		var gal = Gallery.select(function() { //selecting the galery model (json bit)
 		  return this.attr("id") == col
 		}).first();
-		
 		initTemplates(context, function(context){
-			// alert('context = '+context);
-			context.render('/templates/gal.html', {gal: gal}).replace(context.$element('#home .gallery')).then(function(content) {
-					
+			renderTemplate(context, '#home .gallery', '/templates/gal.html', {gal: gal}, function(context){
 					$('#home nav a.active').removeClass('active');//Interface FX (active bt)
 					$('#home nav a.'+col).addClass('active');
-					
 					$(".gallery img").one('load', function() {//FADE IMG on load...
 					  $(this).removeClass('loading');
 					}).each(function() {
 					  if(this.complete) $(this).load(); //fix caching event not firing
 					});
-					
 					$(".gallery img").bind('click touch', function() {//bind scrolling behavior on img clicks
 						$.scrollTo(this, 300, {axis: 'x'});
 					});
 			}); // eo render
 		}); //eo call back for initTemplate	
-			
 	}); // eo route
 
 	///////////////////////
@@ -179,15 +195,12 @@ sammy = Sammy('body', function () {
 });//eo sammy routes
 
 
-// WE LAOD DATA JSON, then call the init Route!
-
 //if (Gallery.count() == 0){ //if it'S not in cache...
 	$.getJSON('data/gallery.json', function(data) { //cached...
 	  $.each(data, function(key, val) {
 			var gal = new Gallery(val);
 			gal.save();
 	  }) //end of each...
-
 		initView(); // starts sammy and fadeIn
 	});//eo json init
 //}//end if!
