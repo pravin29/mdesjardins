@@ -3,7 +3,7 @@
 
 
 @font-face {
-    font-family: 'LacunaRegular';
+    font-family: 'lacuna';
     src: url('lacuna-webfont.eot');
     src: url('lacuna-webfont.eot?#iefix') format('embedded-opentype'),
          url('lacuna-webfont.woff') format('woff'),
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-    font-family: 'LacunaItalicRegular';
+    font-family: 'lacuna it';
     src: url('lacuna-italic-webfont.eot');
     src: url('lacuna-italic-webfont.eot?#iefix') format('embedded-opentype'),
          url('lacuna-italic-webfont.woff') format('woff'),

@@ -3,7 +3,7 @@
 
 
 @font-face {
-    font-family: 'LaneNarrowRegular';
+    font-family: 'lane narrow';
     src: url('LANENAR_-webfont.eot');
     src: url('LANENAR_-webfont.eot?#iefix') format('embedded-opentype'),
          url('LANENAR_-webfont.woff') format('woff'),
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-    font-family: 'LaneUpperRegular';
+    font-family: 'lane upper';
     src: url('LANEUP__-webfont.eot');
     src: url('LANEUP__-webfont.eot?#iefix') format('embedded-opentype'),
          url('LANEUP__-webfont.woff') format('woff'),
@@ -27,7 +27,7 @@
 }
 
 @font-face {
-    font-family: 'LanePoshRegular';
+    font-family: 'lane posh';
     src: url('LANEPOSH-webfont.eot');
     src: url('LANEPOSH-webfont.eot?#iefix') format('embedded-opentype'),
          url('LANEPOSH-webfont.woff') format('woff'),

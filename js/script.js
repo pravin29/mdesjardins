@@ -35,14 +35,15 @@ function initView(){
 }
 
 
-function renderTemplate(context, elem, path, templateData, callback){
-	if($(elem).hasClass('inDom')){
+function renderTemplate(context, elem, path, templateData, cache, callback){
+	if( $(elem).hasClass('inDom') && cache){
 		if($.isFunction(callback)){
 			callback(context); //if temlate already loaded, we just call the callBakc right away.
 		}
 	}else{
 	  context.render(path, templateData)
 	   .replace(context.$element(elem)).then(function(content) {
+				$(elem).addClass('inDom');
 				if($.isFunction(callback)){
 					callback(context);
 				}
@@ -53,20 +54,20 @@ function renderTemplate(context, elem, path, templateData, callback){
 
 function initTemplates(context, callbackHome){
 	
-	renderTemplate(context, 'footer', '/templates/footer.html', {title: "hello!"});
-	renderTemplate(context, 'header', '/templates/header.html', {title: "hello!"}, function(context){
+	renderTemplate(context, 'footer', '/templates/footer.html', {title: "hello!"}, true);
+	renderTemplate(context, 'header', '/templates/header.html', {title: "hello!"}, true, function(context){
 		$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
 			scrollTop();
 		});
 	});
-	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"});	
-	renderTemplate(context, 'section#home', '/templates/home.html', {gal: Gallery.all()}, function(context){
+	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"}, true);	
+	renderTemplate(context, 'section#home', '/templates/home.html', {gal: Gallery.all()}, true, function(context){
 		callbackHome(context);
 	});
 }
 
 function scrollTop(){
-	$('html').scrollTo({ top:0, left:0 }, 300);
+	$('html').scrollTo({ top:0, left:0 }, 100);
 }
 
 
@@ -137,7 +138,7 @@ sammy = Sammy('body', function () {
 		  return this.attr("id") == col
 		}).first();
 		initTemplates(context, function(context){
-			renderTemplate(context, '#home .gallery', '/templates/gal.html', {gal: gal}, function(context){
+			renderTemplate(context, '#home .gallery', '/templates/gal.html', {gal: gal}, false, function(context){  //false = no chache of templ.
 					$('#home nav a.active').removeClass('active');//Interface FX (active bt)
 					$('#home nav a.'+col).addClass('active');
 					$(".gallery img").one('load', function() {//FADE IMG on load...
