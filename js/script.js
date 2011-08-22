@@ -112,7 +112,7 @@ sammy = Sammy('body', function () {
 
 
 	///////////////
-	this.get('/col', function (context) {
+	this.get('/collections', function (context) {
 		//This Route shows the menu, but doesn't change the content!
 		var col = this.params['col'];
 		//alert("col = "+ col);
@@ -127,7 +127,7 @@ sammy = Sammy('body', function () {
 
 
 	//////////////////
-	this.get('/col/:col', function (context) {
+	this.get('/photos/:col', function (context) {
 	//	alert('col route!!');
 		var col = this.params['col'];
 		$('body').removeClass('info');
@@ -166,6 +166,9 @@ sammy = Sammy('body', function () {
 	
 });//eo sammy routes
 
+
+
+/////////////// JSON data load
 
 //if (Gallery.count() == 0){ //if it'S not in cache...
 	$.getJSON('data/gallery.json', function(data) { //cached...

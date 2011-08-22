@@ -2,25 +2,29 @@
 
 <nav>
   
+  <h1>Collections</h1>
+  
   <% for ( var i = 0; i < gal.length; i++ ) { %>
-  <a href="/col/<%= gal[i].attr('id') %>" class="<%= gal[i].attr('id') %>">
+  <a href="/photos/<%= gal[i].attr('id') %>" class="<%= gal[i].attr('id') %>">
     <span class="season"><%= gal[i].attr('season') %></span>
     <span class="year"><%= gal[i].attr('year') %></span>
     <span class="arrow"></span>
   </a>
   <% } %>
   
-  <!-- 
-  <a href="/col/fall_2006">
-    <span class="season">fall</span>
-    <span class="year">2006</span>
-  </a>
   
-  <a href="/col/fall_2011">
+  <h1>Videos</h1>
+  
+  <a href="/videos/fall_2011">
     <span class="season">fall</span>
     <span class="year">2011</span>
   </a>
   
+  <a href="/videos/spring_2011">
+    <span class="season">fall</span>
+    <span class="year">2011</span>
+  </a>
+  <!-- 
   <a href="/col/fall_2011">
     <span class="season">fall</span>
     <span class="year">2011</span>
