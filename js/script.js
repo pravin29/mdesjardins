@@ -31,20 +31,23 @@ function initView(){
 			// ALSO adjust Width accordingly???
 	});
 	$(window).trigger('adjustCssSizes'); //we also trigger the view fix on init 
-	
 	sammy.run('/');
 }
 
 
-
-
 function renderTemplate(context, elem, path, templateData, callback){
-	context.render(path, templateData)
+	if($(elem).hasClass('inDom')){
+		if($.isFunction(callback)){
+			callback(context); //if temlate already loaded, we just call the callBakc right away.
+		}
+	}else{
+	  context.render(path, templateData)
 	   .replace(context.$element(elem)).then(function(content) {
 				if($.isFunction(callback)){
 					callback(context);
 				}
-	});
+	  });
+	}
 }
 
 
@@ -56,48 +59,10 @@ function initTemplates(context, callbackHome){
 			scrollTop();
 		});
 	});
-	
+	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"});	
 	renderTemplate(context, 'section#home', '/templates/home.html', {gal: Gallery.all()}, function(context){
 		callbackHome(context);
 	});
-	
-	
-	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"});
-	/*
-	context.render('/templates/info.html', {title: "hello!"})
-	 .replace(context.$element('section#info')).then(function(content) {
-	});*/
-	
-	/*
-	galleries = Gallery.all();
-		context.render('/templates/home.html', {gal: galleries})
-		.replace(context.$element('section#home')).then(function(content) {
-			callbackHome(context);
-			
-	});*/
-	
-	
-	//!! TODO: only load the templates if they are NOT already loaded...
-	// LOAD PAGE - Initial Load for Basic View
-	
-	
-	/*
-	context.render('/templates/footer.html', {title: "hello!"})
-	   .replace(context.$element('footer')).then(function(content) {
-	});
-		
-	context.render('/templates/header.html', {title: "hello!"})
-		 .replace(context.$element('header')).then(function(content) {
-				$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
-					scrollTop();
-				});
-		});*/
-		
-			/* It bugs because the JSON isn't loaded!!! */
-	
-	
-	
-					
 }
 
 function scrollTop(){
@@ -129,7 +94,10 @@ sammy = Sammy('body', function () {
 		this.use(Sammy.JSON);
 		//this.use(Sammy.Haml); //default uses .template file ext for templates
 
-		//////// LOAD ROUTE (homepage)
+
+
+
+		/////////////// LOAD ROUTE (homepage)
 		this.get('/', function (context) {
 		$('body').removeClass('info');
 		$('body').addClass('col');
@@ -140,6 +108,7 @@ sammy = Sammy('body', function () {
 		
 
 	}); 
+
 
 	///////////////
 	this.get('/col', function (context) {
@@ -153,6 +122,8 @@ sammy = Sammy('body', function () {
 			//alert('call back!!');
 		});
 	}); 
+
+
 
 	//////////////////
 	this.get('/col/:col', function (context) {
