@@ -6,8 +6,9 @@
   
   <% for ( var i = 0; i < gal.length; i++ ) { %>
   <a href="/photos/<%= gal[i].attr('id') %>" class="<%= gal[i].attr('id') %>">
+    <span class="year"><%=  gal[i].attr('year').toString().slice(2) %></span>
     <span class="season"><%= gal[i].attr('season') %></span>
-    <span class="year"><%= gal[i].attr('year') %></span>
+    
     <span class="arrow"></span>
   </a>
   <% } %>
@@ -21,8 +22,9 @@
   </a>
   
   <a href="/videos/spring_2011">
-    <span class="season">fall</span>
     <span class="year">2011</span>
+    <span class="season">spring</span>
+    
   </a>
   <!-- 
   <a href="/col/fall_2011">

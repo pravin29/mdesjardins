@@ -61,6 +61,8 @@ function initTemplates(context, callbackHome){
 		});
 	});
 	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"}, true);	
+	renderTemplate(context, 'section#bio', '/templates/bio.html', {title: "hello!"}, true);	
+	renderTemplate(context, 'section#credit', '/templates/credit.html', {title: "hello!"}, true);	
 	renderTemplate(context, 'section#home', '/templates/home.html', {gal: Gallery.all()}, true, function(context){
 		callbackHome(context);
 	});
@@ -70,6 +72,14 @@ function scrollTop(){
 	$('html').scrollTo({ top:0, left:0 }, 100);
 }
 
+function formatYear(yyyy){
+	return yyyy.toString().slice(2);
+}
+
+function bodyClass(context, section){
+	$('body').removeClass('info bio col credit');
+	$('body').addClass(section);
+}
 
 /////////////// MODEL CODE...
 
@@ -100,8 +110,7 @@ sammy = Sammy('body', function () {
 
 		/////////////// LOAD ROUTE (homepage)
 		this.get('/', function (context) {
-		$('body').removeClass('info');
-		$('body').addClass('col');
+		bodyClass(context, 'col');
 		scrollTop();
 		initTemplates(context, function(context){
 			// alert('call back!!');
@@ -116,8 +125,7 @@ sammy = Sammy('body', function () {
 		//This Route shows the menu, but doesn't change the content!
 		var col = this.params['col'];
 		//alert("col = "+ col);
-		$('body').removeClass('info');
-		$('body').addClass('col');
+bodyClass(context, 'col');
 		scrollTop();
 		initTemplates(context, function(context){
 			//alert('call back!!');
@@ -130,8 +138,7 @@ sammy = Sammy('body', function () {
 	this.get('/photos/:col', function (context) {
 	//	alert('col route!!');
 		var col = this.params['col'];
-		$('body').removeClass('info');
-		$('body').addClass('col');
+bodyClass(context, 'col');
 		//scrollTop();
 		$('html').scrollTo({ top:0, left:200 }, 300); //!! TWEAK value!
 		var gal = Gallery.select(function() { //selecting the galery model (json bit)
@@ -156,11 +163,27 @@ sammy = Sammy('body', function () {
 	///////////////////////
 	this.get('/infos', function (context) {
 		//alert("infos");
-		$('body').removeClass('col');
-		$('body').addClass('info');
+		bodyClass(context, 'info');
 		scrollTop();
 		initTemplates(context, function(context){
 			alert('call back!!');
+		});
+	}); // eo route
+	
+	
+	this.get('/bio', function (context) {
+		bodyClass(context, 'bio');
+		scrollTop();
+		initTemplates(context, function(context){
+			//alert('call back!!');
+		});
+	}); // eo route
+	
+	this.get('/credits', function (context) {
+		bodyClass(context, 'credit');
+		scrollTop();
+		initTemplates(context, function(context){
+			//alert('call back!!');
 		});
 	}); // eo route
 	
