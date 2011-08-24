@@ -69,7 +69,7 @@ function initTemplates(context, callbackHome){
 }
 
 function scrollTop(){
-	$('html').scrollTo({ top:0, left:0 }, 100);
+	$('html').scrollTo({ top:0, left:0, }, {duration:100});
 }
 
 function formatYear(yyyy){
@@ -111,9 +111,13 @@ sammy = Sammy('body', function () {
 		/////////////// LOAD ROUTE (homepage)
 		this.get('/', function (context) {
 		bodyClass(context, 'col');
-		scrollTop();
+		
 		initTemplates(context, function(context){
-			// alert('call back!!');
+			 //alert('call back!!');
+			 //scrollTop();
+			$('html').scrollTo({ top:0, left:190 }, 50);
+			sammy.runRoute ( 'get', '/photos/2011_fall'); //we load the current collection by default but don't stack in history!!
+			
 		});
 		
 
