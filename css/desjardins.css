@@ -38,10 +38,11 @@ html.js #seo{ display:none;}
 
 /* LAYOUT */
 
+html{ overflow-y:hidden; }
 
 header{ height:60px; width:100%; background:#000;  position:fixed; z-index:1; font-size:16px; border-bottom:dashed 1px #444; }
 header{ }
-footer{ height:55px; width:100%; background:#000; bottom:0px; position:fixed; border-top:dashed 1px #444; }
+footer{ height:55px; width:100%; background:#000; bottom:0px; position:fixed; border-top:dashed 1px #444; z-index:10;}
 section#home{ 
 	position:relative; 
 	height:100%; 
@@ -56,11 +57,35 @@ section#home{
 	-o-transition: all 0.6s ease-in-out;
 	-ms-transition: all 0.6s ease-in-out;
 	transition: all 0.6s ease-in-out; 
+	width:100%;
 	}
 
 
 
+/*  SCTION TRANSITONS */
+section{
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	-o-transition: all 0.6s ease-in-out;
+	-ms-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+	position:absolute;
+	top:80px;
+	min-height:300px;
+	width:100%;
+	clear:both;
+	display:block;
+}
 
+section{margin-top:-100%; opacity:0; z-index:-1; }
+section.out{margin-top:100%; opacity:0;}
+section.active{margin-top:0%; opacity:1; z-index:1; }
+
+	/*
+	body.info #main_scroll{ margin-top: -700px; /* TO UPDATE DYNAMICALLY as well! !! */
+	/*	}
+body.home #main_scroll{ margin-top: 0px; }
+*/
 
 /* HEADER */
 header nav{ padding: 10px 15px; padding-top:16px }
@@ -86,7 +111,7 @@ header h1{ padding:0px; margin:auto; color:#fff;
 
 
 	/* active states*/
-	body.col nav a.btCol, body.info nav a.btInfo, body.bio nav a.btBio, body.credit nav a.btCredit{ background:#fff; color:#000;}
+	body.home nav a.btCol, body.info nav a.btInfo, body.bio nav a.btBio, body.credit nav a.btCredit{ background:#fff; color:#000;}
 
 
 /* GALLERY */
@@ -128,6 +153,9 @@ header h1{ padding:0px; margin:auto; color:#fff;
 	}
 
 #home nav a.active{ opacity:1; text-decoration:underline;}
+
+#home nav a img.video{width:120px; 
+}
 .gallery{ border-left:solid 3px #fff; padding-left:15px;}
 .gallery img{ 
 	cursor:pointer;
@@ -158,14 +186,12 @@ header h1{ padding:0px; margin:auto; color:#fff;
 	
 /* INFO */
 #main{ 
-	height:600px;  
+	height:3000px;  
 	/*background:#f00;*/
 	
 	}
-	body.info #main_scroll{ margin-top: -700px; /* TO UPDATE DYNAMICALLY as well! !! */
-		}
-body.col #main_scroll{ margin-top: 0px; }
 
+/*
 #main_scroll{
 
 	 position:relative;
@@ -173,9 +199,8 @@ body.col #main_scroll{ margin-top: 0px; }
   -moz-transition: all 0.6s ease-in-out;
   -o-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
-}
+}*/
 
-html{ overflow-y:hidden; }
 
 
 

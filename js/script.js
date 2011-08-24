@@ -31,7 +31,9 @@ function initView(){
 			// ALSO adjust Width accordingly???
 	});
 	$(window).trigger('adjustCssSizes'); //we also trigger the view fix on init 
+	
 	sammy.run('/');
+	
 }
 
 
@@ -57,7 +59,7 @@ function initTemplates(context, callbackHome){
 	renderTemplate(context, 'footer', '/templates/footer.html', {title: "hello!"}, true);
 	renderTemplate(context, 'header', '/templates/header.html', {title: "hello!"}, true, function(context){
 		$('header .bt').bind('click touch', function() {//Adding action to header buttons (mindless of route changes)
-			scrollTop();
+			scrollBase();
 		});
 	});
 	renderTemplate(context, 'section#info', '/templates/info.html', {title: "hello!"}, true);	
@@ -68,33 +70,37 @@ function initTemplates(context, callbackHome){
 	});
 }
 
-function scrollTop(){
-	$('html').scrollTo({ top:0, left:0, }, {duration:100});
+function scrollBase(){
+	// !! first check if we NEED to scroll there...
+	if($('html').scrollLeft() > 0){
+		$('html').scrollTo({ top:0, left:0, }, {duration:300});
+	}
 }
 
 function formatYear(yyyy){
 	return yyyy.toString().slice(2);
 }
 
+
 function bodyClass(context, section){
- if(! $('body').hasClass(section)){  //we make sure we don'T hcange class, if we remain in the same main section
-	$('body').removeClass('info bio col credit');
+ //if(! $('body').hasClass(section)){  //we make sure we don'T hcange class, if we remain in the same main section
+	$('body').removeClass('info bio home col credit');
 	$('body').addClass(section);
 	
-	
+	//alert('section = '+section);
 	//we trigger page transition
 	$('section.out').removeClass('out');//cleanup old animation leftover
-	$('section#'+cat).addClass('in');
 	
-	$('section.active').removeClass('active in').addClass('out').delay(300).queue(function(next){
-		// $('section.out').remove(); //we remove the DOM node once anim is over...
-	 $('section.in').removeClass('in');  //let the new section animate to it's normal state.
 	
+	$('section.active').removeClass('active in').addClass('out').delay(1000).queue(function(next){
+	 //$('section.out').removeClass('out'); //we remove the DOM node once anim is over...
+	 		$('section.in').removeClass('in');  //let the new section animate to it's normal state.
+			//also remove the 'out' class...
+			$('section.out').removeClass('out'); 
 		next();
-		
 	}); //eo queue
-	
- }//end if
+	$('section#'+section).addClass('in active');
+ //}//end if
 }
 
 
@@ -130,12 +136,13 @@ sammy = Sammy('body', function () {
 
 		/////////////// LOAD ROUTE (homepage)
 		this.get('/', function (context) {
-		bodyClass(context, 'col');
+		
 		
 		initTemplates(context, function(context){
 			 //alert('call back!!');
-			 //scrollTop();
+			 //scrollBase();
 			$('html').scrollTo({ top:0, left:190 }, 50);
+			bodyClass(context, 'home');
 			sammy.runRoute ( 'get', '/photos/2011_fall'); //we load the current collection by default but don't stack in history!!
 				
 		});
@@ -149,8 +156,8 @@ sammy = Sammy('body', function () {
 		//This Route shows the menu, but doesn't change the content!
 		var col = this.params['col'];
 		//alert("col = "+ col);
-bodyClass(context, 'col');
-		scrollTop();
+bodyClass(context, 'home');
+		scrollBase();
 		initTemplates(context, function(context){
 			//alert('call back!!');
 		});
@@ -162,8 +169,8 @@ bodyClass(context, 'col');
 	this.get('/photos/:col', function (context) {
 	//	alert('col route!!');
 		var col = this.params['col'];
-		bodyClass(context, 'col');
-		//scrollTop();
+		bodyClass(context, 'home');
+		//scrollBase();
 		
 		// $('html').scrollTo({ top:0, left:200 }, 200); //!! TWEAK value!
 		var gal = Gallery.select(function() { //selecting the galery model (json bit)
@@ -192,16 +199,16 @@ bodyClass(context, 'col');
 	this.get('/infos', function (context) {
 		//alert("infos");
 		bodyClass(context, 'info');
-		scrollTop();
+		scrollBase();
 		initTemplates(context, function(context){
-			alert('call back!!');
+			//alert('call back!!');
 		});
 	}); // eo route
 	
 	
 	this.get('/bio', function (context) {
 		bodyClass(context, 'bio');
-		scrollTop();
+		scrollBase();
 		initTemplates(context, function(context){
 			//alert('call back!!');
 		});
@@ -209,7 +216,7 @@ bodyClass(context, 'col');
 	
 	this.get('/credits', function (context) {
 		bodyClass(context, 'credit');
-		scrollTop();
+		scrollBase();
 		initTemplates(context, function(context){
 			//alert('call back!!');
 		});
@@ -227,9 +234,13 @@ bodyClass(context, 'col');
 			var gal = new Gallery(val);
 			gal.save();
 	  }) //end of each...
+	  
 		initView(); // starts sammy and fadeIn
+		// 
 	});//eo json init
 //}//end if!
+
+
 
 });//eo doc ready
 
