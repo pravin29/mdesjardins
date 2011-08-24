@@ -77,9 +77,29 @@ function formatYear(yyyy){
 }
 
 function bodyClass(context, section){
+ if(! $('body').hasClass(section)){  //we make sure we don'T hcange class, if we remain in the same main section
 	$('body').removeClass('info bio col credit');
 	$('body').addClass(section);
+	
+	
+	//we trigger page transition
+	$('section.out').removeClass('out');//cleanup old animation leftover
+	$('section#'+cat).addClass('in');
+	
+	$('section.active').removeClass('active in').addClass('out').delay(300).queue(function(next){
+		// $('section.out').remove(); //we remove the DOM node once anim is over...
+	 $('section.in').removeClass('in');  //let the new section animate to it's normal state.
+	
+		next();
+		
+	}); //eo queue
+	
+ }//end if
 }
+
+
+
+
 
 /////////////// MODEL CODE...
 
