@@ -117,7 +117,7 @@ sammy = Sammy('body', function () {
 			 //scrollTop();
 			$('html').scrollTo({ top:0, left:190 }, 50);
 			sammy.runRoute ( 'get', '/photos/2011_fall'); //we load the current collection by default but don't stack in history!!
-			
+				
 		});
 		
 

@@ -77,7 +77,8 @@ header h1{ padding:0px; margin:auto; color:#fff;
 	width:100%;
 	position:fixed;
 	z-index:-10;
-	}
+	cursor:default;
+}
 
 #fade_l, #fade_r{ width:40px;  z-index:10; position:fixed; height:100%; opacity:0.6; }
 #fade_l{left:0px; background:url('../img/fade_l.png'); }
