@@ -138,12 +138,14 @@ bodyClass(context, 'col');
 	this.get('/photos/:col', function (context) {
 	//	alert('col route!!');
 		var col = this.params['col'];
-bodyClass(context, 'col');
+		bodyClass(context, 'col');
 		//scrollTop();
-		$('html').scrollTo({ top:0, left:200 }, 300); //!! TWEAK value!
+		
+		// $('html').scrollTo({ top:0, left:200 }, 200); //!! TWEAK value!
 		var gal = Gallery.select(function() { //selecting the galery model (json bit)
 		  return this.attr("id") == col
 		}).first();
+		$('header .btCol strong').text(gal.attr('season') +" "+ gal.attr('year'));
 		initTemplates(context, function(context){
 			renderTemplate(context, '#home .gallery', '/templates/gal.html', {gal: gal}, false, function(context){  //false = no chache of templ.
 					$('#home nav a.active').removeClass('active');//Interface FX (active bt)
@@ -154,8 +156,10 @@ bodyClass(context, 'col');
 					  if(this.complete) $(this).load(); //fix caching event not firing
 					});
 					$(".gallery img").bind('click touch', function() {//bind scrolling behavior on img clicks
-						$.scrollTo(this, 300, {axis: 'x'});
+						$('html').scrollTo(this, 300, {axis: 'x'});
+						//alert('touch img');
 					});
+					
 			}); // eo render
 		}); //eo call back for initTemplate	
 	}); // eo route

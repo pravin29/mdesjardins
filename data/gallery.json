@@ -3,55 +3,55 @@
         "id": "2011_fall",
         "nbImg": "6",
         "year": "2011",
-        "season": "fall",
+        "season": "Fall",
         "link-video": "/videos/fall_2001"
     },
     {
         "id": "2011_spring",
         "nbImg": "4",
         "year": "2011",
-        "season": "spring"
+        "season": "Spring"
     },
     {
         "id": "2010_fall",
         "nbImg": "12",
         "year": "2010",
-        "season": "fall"
+        "season": "Fall"
     },
     {
         "id": "2010_spring",
         "nbImg": "8",
         "year": "2010",
-        "season": "spring"
+        "season": "Spring"
     },
     {
         "id": "2009_fall",
         "nbImg": "8",
         "year": "2009",
-        "season": "fall"
+        "season": "Fall"
     },
     {
         "id": "2008_spring",
         "nbImg": "7",
         "year": "2008",
-        "season": "spring"
+        "season": "Spring"
     },
     {
         "id": "2006_fall",
         "nbImg": "4",
         "year": "2006",
-        "season": "fall"
+        "season": "Fall"
     },
     {
         "id": "2006_spring",
         "nbImg": "6",
         "year": "2006",
-        "season": "spring"
+        "season": "Spring"
     },
     {
         "id": "2005_fall",
         "nbImg": "10",
         "year": "2005",
-        "season": "fall"
+        "season": "Fall"
     }
 ]

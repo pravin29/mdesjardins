@@ -2,14 +2,14 @@
 
 <nav>
   
-  <h1>Collections</h1>
+  <h1>Photos</h1>
   
   <% for ( var i = 0; i < gal.length; i++ ) { %>
   <a href="/photos/<%= gal[i].attr('id') %>" class="<%= gal[i].attr('id') %>">
+    <span class="arrow"></span>
     <span class="year"><%=  gal[i].attr('year').toString().slice(2) %></span>
     <span class="season"><%= gal[i].attr('season') %></span>
     
-    <span class="arrow"></span>
   </a>
   <% } %>
   
